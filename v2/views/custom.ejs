@@ -1,0 +1,54 @@
+<% include ./partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center page-header">
+      <h1>Custom Orders</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 contactdiv">
+      <p class="contactText">We appreciate your efforts to buy Black and support Black businesses and institutions. While our inventory is varied, it is not limitless. If there is a title you're looking for that we do not have, or a particular type of art that you do not see, please send us a request. Use our form below to make a customized order, and we will make every effort to fulfill your order as soon as possible. Be sure to fill in as many fields and provide as many details as you can. It will assist us in assisting you. Asante Sana! </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 contactdiv">
+    <form action="/order" method="POST">
+      <div class="form-group form-group-lg">
+        <label for="InputName1">First Name</label>
+        <input type="text" class="form-control input-lg" name="FirstN" placeholder="First Name">
+      </div>
+      <div class="form-group form-group-lg">
+        <label for="InputName2">Last Name</label>
+        <input type="text" class="form-control input-lg" name="LastN" placeholder="Last Name">
+      </div>
+      <div class="form-group">
+        <label for="InputEmail1">Email address</label>
+        <input type="email" class="form-control input-lg" name="Email" placeholder="first.last@example.com">
+      </div>
+      <div class="form-group form-group-lg">
+        <label for="BookTitle1">Book Title</label>
+        <input type="text" class="form-control input-lg" name="Title" placeholder="Book Title">
+      </div>
+      <div class="form-group form-group-lg">
+        <label for="BookAuthor1">Book Author</label>
+        <input type="text" class="form-control input-lg" name="Author" placeholder="Book Author">
+      </div>
+      <div class="form-group form-group-lg">
+        <label for="ISBN1">ISBN Number</label>
+        <input type="number" class="form-control input-lg" name="ISBN" placeholder="ISBN Number">
+      </div>
+      <div class="form-group form-group-lg">
+        <label for="Publisher1">Publisher</label>
+        <input type="text" class="form-control input-lg" name="Publisher" placeholder="Publisher">
+      </div>
+      <label for="InputComments1">Comments/Questions/Concerns</label>
+      <textarea class="form-control textbox input-lg" rows="10" name="Comment" placeholder="Enter your comments here"></textarea>
+      <button class="btn btn-default contactsubmit input-lg" type="submit" >Submit</button>
+    </form>
+  </div>
+</div>
+</div>
+
+
+<% include ./partials/footer %>

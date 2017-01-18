@@ -1,0 +1,39 @@
+<% include ./partials/header %>
+
+<h1 class="text-center page-header">Cart</h1>
+<h1 class="text-left side-header"><a href="/index">Go Back</a></h1>
+<h3>Cart for <%= account.username %></h3>
+
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-md-12 cartitems">
+        <% if (cart == undefined || !cart || cart.items == null) { %>
+            <h1>Your cart is empty </h1>
+        <% } else { %> 
+            <% cart.items.forEach(function(item){ %>
+
+                <img src=" <%= item.image %> ">
+                <form action="/cart/remove" method="POST">
+                    <div class="form-group">
+                        <li class="cartitem"><%= item.image %> - <%=item.name %> - <%= item.price %>
+                        <input class="cartqty" type="number" name="quantity"
+                        min="0" max="100" step="1" value="<%= item.quantity%>">
+                        <input type="hidden" name="itemid" value="<%-item.id%>">
+                        <a href="/cart/add-item" class="btn btn-primary" role="button">Update Quantity</a>
+                        <button class="btn btn-danger" type="submit">Remove</button>
+                        </li>
+                    </div>
+                </form>
+            <% }) %>
+        <% } %>
+        </div>
+        <div class="col-md-12 inline">
+            <h3>Cart Total</h3>
+            <h4><%= cart.grand_total%></h4>
+            <a class="btn btn-success" href="/checkout" role="button">Checkout</a>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+</div>

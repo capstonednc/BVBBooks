@@ -1,0 +1,29 @@
+<% include ./partials/header %>
+
+<div class="container-fluid">
+	<div class="row">
+		<h1 class="text-center page-header">Account Info</h1>
+        <div class="col-md-2">
+                <ul class="nav nav-pills nav-stacked">
+				<li role="presentation" class="active"><a href="/">General</a></li>
+				<li role="presentation"><a href="/">Password/Email</a></li>
+				<li role="presentation"><a href="/">Billing</a></li>
+				<li role="presentation"><a href="/">Shipping</a></li>
+				<li role="presentation"><a href="/">Past Orders</a></li>
+				<li role="presentation"><a href="/">Reviews</a></li>
+				<li role="presentation"><a href="/">Coupons</a></li>
+				<li role="presentation"><a href="/">Subscriptions</a></li>
+				<li role="presentation"><a href="/">Downloaded Items</a></li>
+				<li role="presentation"><a href="/">Preferences</a></li>
+                </ul>
+        </div>
+        <div class="col-md-6">
+        	<p><strong>Name</strong> - <%=account.name %></p>
+        	<p><strong>Username</strong> - <%=account.username %></p>
+        	<p><strong>Email</strong> - <%=account.email %></p>
+			<p><strong>Member Since</strong> - <%= moment(account.date_created) %></p>
+        </div>
+    </div>
+</div>
+
+<% include ./partials/footer %>

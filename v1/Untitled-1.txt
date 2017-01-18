@@ -1,0 +1,22 @@
+request
+        .post('http://localhost:3001/v1/account/login')
+        .use(uuid)
+        .set({'X-Session': '3ldekr34fg' })
+        .send({
+            data: {
+                email: 'khari.kisile@gmail.com',
+                password: '2016'
+            }
+        })
+        .end(function (error, data){
+            if(data){
+                req.session.account_id = data;
+                console.log(req.sessionID);
+                console.log(data);
+                req.flash("success", "Logged in, " + data.email + ".");
+                res.redirect("/index");
+            } else {
+                console.log(error);
+                res.redirect('login');
+            }
+        });

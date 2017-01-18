@@ -1,0 +1,66 @@
+<% include ./partials/header %>
+
+<div class="container-fluid">
+    <div class="row page-header">
+        <div class="col-md-2">
+            <h1 class="text-left side-header"><a href="/index">Home</a></h1>         
+        </div>
+        <div class="col-md-8">
+            <h1 class="text-center pageheader"><%= account.username %>'s Cart</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 cartitems">
+        <% if (cart === null || !cart.items) { %>
+            <h1>Your cart is empty </h1>
+        <% } else { %> 
+            <% cart.items.forEach(function(item){ %>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-2 cartitem">
+                        <p> <%=item.product.name %></p>
+                        <p> <%= item.price %></p> 
+                        <img class = "cartthumb" src="<%= item.product.images[0].file.url %>">
+                    </div>
+                    <div class="col-md-2">
+                        <div class="cartoptions">
+                            <form action="/cart" method="POST">
+                                <div class="form-group">
+                                    <input class="cartqty" type="number" name="quantity"min="0" max="100" step="1" value="<%= item.quantity%>">
+                                    <input type="hidden" name="itemid" value="<%-item.id%>">
+                                    <input type="hidden" name="productId" value="<%-item.product.id%>">
+                                    <button class="btn btn-primary" type="submit">Update Quantity</button>    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="cartoptions">
+                            <form class="form-inline" action="/cart/remove" method="POST">
+                                <div class="form-group">
+                                    <input class="cartqty" type="hidden" name="quantity"min="0" max="100" step="1" value="<%= item.quantity%>">
+                                    <input type="hidden" name="itemid" value="<%-item.id%>">
+                                    <button class="btn btn-danger" type="submit">Remove</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        <% } %>
+        </div>
+        <div class="col-md-12">
+            <h3>Cart Total</h3>
+            <h4><%= cart.grand_total%></h4>
+            <a class="btn btn-warning" href="/shop" role="button">Back to Shopping</a>
+            <a class="btn btn-success" href="/cart/billing" role="button">Next: Add Billing Info</a>
+            <form class="inline" action="/checkout" method="POST">
+                <input type="hidden" name="itemid" value="<%= cart %>">
+                <button class="btn btn-success" type="submit">Checkout</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include ./partials/footer %>

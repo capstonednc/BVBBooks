@@ -1,0 +1,88 @@
+<% include ./partials/header %>
+
+<div class="container-fluid">
+	<div class="row">
+		<h1 class="text-center page-header">Account</h1>
+        <div class="col-md-2">
+                <ul class="nav nav-pills nav-stacked">
+				<li role="presentation" class="active"><a href="/account">General</a></li>
+				<li role="presentation"><a href="#">Password/Email</a></li>
+				<li role="presentation"><a href="/account/billing">Billing</a></li>
+				<li role="presentation"><a href="/account/shipping">Shipping</a></li>
+				<li role="presentation"><a href="/account/orders">Orders</a></li>
+				<li role="presentation"><a href="#">Reviews</a></li>
+				<li role="presentation"><a href="#">Coupons</a></li>
+				<li role="presentation"><a href="#">Subscriptions</a></li>
+				<li role="presentation"><a href="#">Downloaded Items</a></li>
+				<li role="presentation"><a href="#">Preferences</a></li>
+                </ul>
+        </div>
+		<div class="col-md-4">
+            <% if (!account) { %>
+            <h2>You currently have no info. Feel free to <a href="/shop">browse</a> our selections. Add items to your cart, and then come back.</h2>
+
+            <% } else { %> 
+
+            <div class="panel panel-default bvbform">
+                <div class="panel-body">
+                    <h2 class="text-center">Account Basics</h2>
+                	<p><strong>Account Number </strong> - <%=account.id %></p>
+                    <p><strong>Name</strong> - <%=account.name %></p>
+					<p><strong>Username</strong> - <%=account.username %></p>
+					<p><strong>Email</strong> - <%=account.email %></p>
+					<p><strong>Member Since</strong> - <%= moment(account.date_created) %></p>
+                </div>
+            </div>
+            <div class="panel panel-default bvbform">
+                <div class="panel-body text-center">
+                    <h2>Billing Info</h2>
+        
+                    <% if (!account.billing || account.billing === undefined) { %> 
+					<p>You don't have billing info for this account yet</p>
+                    <a class="btn btn-info" href="/account/billing" role="button">Add Billing Info</a>
+                    <% } else { 
+						var billing = account.billing;
+						var card = billing.card;
+						var billingAddress = billing.address1 + " "  + billing.city + ", " + billing.state + " " + billing.zip 	
+					%> 
+                    <p><strong>Billing Name</strong> - <%=billing.name %></p>
+                	<p><strong>Billing Address</strong> - <%= billingAddress %> </p>
+                	<p><strong>Billing Phone</strong> - <%=billing.phone %></p>
+        			<p><strong>Credit Card</strong> - <%= card.brand %> ending in <%=card.last4 %></p>
+                    <p><strong>Expiration</strong> - <%= card.exp_month %>/<%=card.exp_year %></p>
+    
+                <% } %>
+    
+                </div>
+            </div>
+
+            
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default bvbform">
+                <div class="panel-body text-center">
+                    <h2>Shipping Info</h2>
+            
+                        <% if (!account.shipping || account.shipping === undefined) { %>
+						<p>You don't have shipping info for this account yet</p>
+						<a class="btn btn-info" href="/account/shipping" role="button">Add Shipping Info</a>
+                        <% } else { 
+							var shipping = account.shipping;
+
+                            var shippingAddress = shipping.address1 + " "  + shipping.city + ", " + shipping.state + " " + shipping.zip;    
+                        %> 
+                        <p><strong>Shipping Name</strong> - <%=shipping.name %></p>
+                        <p><strong>Shipping Address</strong> - <%= shippingAddress %> </p>
+                        <p><strong>Shipping Phone</strong> - <%=shipping.phone %></p>
+            
+                        <% } %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+	<% } %>
+</div>
+
+<% include ./partials/footer %>

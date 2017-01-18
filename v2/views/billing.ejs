@@ -1,0 +1,143 @@
+<% include ./partials/header %>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h1 class="page-header">Billing Info</h1>
+		</div>
+	</div>
+
+			<% 
+			
+			var billing = account.billing;
+			var cartBilling = cart.billing;
+			var noAcctBilling = !billing || billing === undefined || !billing.name;
+			var noCartBilling = !cartBilling || cartBilling === undefined || !cartBilling.name;
+			%>
+			
+
+			<% if (noAcctBilling && noCartBilling) { %> 
+			<div class="panel panel-default nocards bvbform">
+				<div class="panel-body">
+					<p>You don't have any billing information associated with your account. Please add info to continue. </p>
+					<a class="btn btn-info nocardbutton" href="#" role="button" onclick="shownew()">Add Billing Info</a>
+				</div>
+			</div>
+
+            <% } else if(noAcctBilling && !noCartBilling) { %> 
+			<h3>You don't have account info, but you have cart info.</h3>
+			<% 
+			var cartCard = cartBilling.card;
+			var cartBillingAddress = cartBilling.address1 + " "  + cartBilling.city + ", " + cartBilling.state + " " + cartBilling.zip 
+			%>
+			<div class="col-md-4">
+				<div class="panel panel-default bvbform">
+					<div class="panel-body">
+						<p><strong><%=cartBilling.name %></strong></p>
+			        	<p><%= cartBillingAddress %> </p>
+			        	<p><%=cartBilling.phone %></p>
+						<p><strong><%= cartCard.brand %></strong> ending in <%=cartCard.last4 %></p>
+			            <p>Expires <%= cartCard.exp_month %>/<%=cartCard.exp_year %></p>
+						<a class="btn btn-success nocardbutton" href="/cart/shipping" role="button">Use This Card</a>
+						<a class="btn btn-info nocardbutton" href="#" role="button" onclick="shownew()">Use New Card</a>
+					</div>
+				</div>
+			</div>
+			<% } else { %>
+
+			<% 
+			var cardinfo = billing.account_card_id;
+			var card = billing.card;
+			var billingAddress = billing.address1 + " "  + billing.city + ", " + billing.state + " " + billing.zip 
+			%>
+
+			<div class="panel panel-default bvbform">
+				<div class="panel-body">
+					<p><strong><%=billing.name %></strong></p>
+		        	<p><%= billingAddress %> </p>
+		        	<p><%=billing.phone %></p>
+					<p><strong><%= card.brand %></strong> ending in <%=card.last4 %></p>
+		            <p>Expires <%= card.exp_month %>/<%=card.exp_year %></p>
+					<p>
+						<a class="btn btn-success nocardbutton" href="/cart/shipping" role="button">Use This Card</a>
+						<a class="btn btn-info nocardbutton" href="#" role="button" onclick="shownew()">Use New Card</a>
+					</p>
+					<p>
+						<a class="btn btn-warning nocardbutton" href="#" role="button" onclick="shownew()">Edit This Card</a>
+						<a class="btn btn-danger nocardbutton" href="#" role="button" onclick="shownew()">Remove This Card</a>
+					</p>
+				</div>
+			</div>
+
+			<% } %>
+
+			<div class="addnew">
+				<h2>Add New Card</h2>
+	
+				<form class="bvbform" id="checkout-form" method="POST" action="/cart/billing?_method=PUT">
+					<div class="row">
+						<div class="field form-group col-md-3 col-xs-3 span4 required">
+							<label class="control-label field-label">Name on Card</label> 
+							<input type="text" name="" value="" placeholder="" data-type="string" class="form-control billing-name">
+						</div>
+						<div class="field form-group col-md-3 col-xs-3 span4 required">
+							<label class="control-label field-label">Credit Card Number</label>
+							<input type="tel" name="" value="" placeholder="**** **** **** ****" data-type="string" class="form-control card-number">
+						</div>
+						<div class="field form-group col-md-2 col-xs-2 span1 required">
+							<label class="control-label field-label">Expire Month</label>
+							<input type="text" name="" value="" placeholder="MM" data-type="number" class="form-control card-exp-month">
+						</div>
+						<div class="field form-group col-md-2 col-xs-2 span1 required">
+							<label class="control-label field-label">Expire Year</label> 
+							<input type="text" name="" value="" placeholder="YYYY" data-type="number" class="form-control card-exp-year">
+						</div>
+						<div class="field form-group col-md-2 col-xs-2 span1 required">
+							<label class="control-label field-label">Security Code</label>
+							<input type="text" name="" value="" placeholder="CVC" data-type="string" class="form-control card-cvc">
+						</div>
+					</div>
+					<div class="row">
+						<div class="field form-group col-md-12 col-xs-12 span4">
+							<label class="control-label field-label">Address Line 1</label> 
+							<input type="text" name="" value="" placeholder="" data-type="string" class="form-control billing-address1">
+						</div>
+					</div>
+					<div class="row">
+						<div class="field form-group col-md-12 col-xs-12 span4">
+							<label class="control-label field-label">Address Line 2</label> 
+							<input type="text" name="" value="" placeholder="" data-type="string" class="form-control billing-address2">
+						</div>
+					</div>
+					<div class="row">
+						<div class="field col-md-3 col-xs-3 form-group span2">
+							<label class="control-label field-label">City</label> 
+							<input type="text" name="" value="" placeholder="" data-type="string" class="form-control billing-city">
+						</div>
+						<div class="field col-md-3 col-xs-3 form-group span2">
+							<label class="control-label field-label">State</label> 
+							<input type="text" name="" value="" placeholder="" data-type="string" class="form-control billing-state">
+						</div>
+						<div class="field col-md-3 col-xs-3 form-group span2">
+							<label class="control-label field-label">Zip/Postal Code</label> 
+							<input type="text" name="" value="" placeholder="" data-type="string" class="form-control billing-zip">
+						</div>
+						<div class="field col-md-3 col-xs-3 form-group span2">
+							<label class="control-label field-label">Country</label> 
+							<input type="text" name="" value="" class="form-control billing-country">
+						</div>
+					</div>
+					<button class="btn btn-success form-group" type="button" value="submit" onclick="token()">Add Card</button>
+					<button class="btn btn-danger form-group" type="button" onclick="hideform()">Cancel</button>
+				</form>
+			</div>
+</div>
+
+
+
+
+
+<% include ./partials/footer %>
+

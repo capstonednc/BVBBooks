@@ -1,0 +1,34 @@
+<% include ./partials/header %>
+
+<h1 class="text-left side-header"><a href="/index">Go Back</a></h1><h1 class="text-center page-header">Books</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <h3 class="col-xs-12 bookcats"><a name="hiscul"> History and Culture </h3>
+    </div>
+    <% product.results.forEach(function(book){ %>
+        <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 text-center books"> 
+    <% book.images.forEach(function(image){ %>
+            <div class="thumbnail shopitem">
+                <h4 class="bkname"><strong><%= book.name %></h4></strong>
+                <a href="/shop/<%= book.id %>">
+                    <img class="img-responsive bookimg" src="<%= image.file.url %>" alt="<%= book.name %>" height="300">  
+                </a>
+    <% }) %>
+                <div class="caption">
+                    <h4 class="bkprce"><%= book.attributes[0].value %></h4>
+                    <h4 class="bkprce">$<%= book.price %></h4>
+                </div>
+                    <a href="/shop/<%=book.id %>" class="btn btn-default">More Info</a>
+                    <form action="/cart" method="POST">
+                        <input type="hidden" name="productId" value="<%=book.id%>">
+                        <button class="btn btn-warning" type="submit">Add to Cart</button>
+                    </form>
+            </div>
+        </div>
+    <% }) %>
+    </div>    
+</div>
+
+    
+<% include ./partials/footer %>

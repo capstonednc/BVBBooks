@@ -1,0 +1,40 @@
+<% include ./partials/header %>
+
+<h1 class="text-left side-header"><a href="/shop">Go Back</a></h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <p class="lead">Categories</p>
+                <ul class="nav nav-pills nav-stacked">
+                </ul>
+        </div>
+        <div class="col-md-2">
+            <div class="thumbnail">
+                <img src=" <%= product.images[0].file.url %> ">
+                <div class="caption text-center">
+                    <h5><%= product.name %></h5>
+                    <h5><%= product.attributes[0].value %></h5>
+                </div>
+            </div>
+            <form action="/cart" method="POST">
+                <div class="form-group cart">
+                Qty:
+                <input class="cartinput" type="number" name="quantity"
+                   min="0" max="100" step="1">
+                <input type="hidden" name="productId" value="<%=product.id%>">
+                <button class="btn btn-lg btn-success">Add to Cart</button>
+            </div>
+            </form>
+        </div>
+        <div class="col-md-4 text-left">
+            <h1><%= product.name %></h1>
+            <h2><%= product.attributes[0].value %></h2>
+            <p class="bookinfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit</b>. Fusce nec tellus sed augue semper porta. Mauris massa. <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit</b>. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit</b>. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. </p>
+        </div>
+        <div class="col-md-4">
+            
+        </div>
+    </div>
+</div>
+
+<% include ./partials/footer %>

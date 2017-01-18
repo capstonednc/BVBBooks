@@ -1,0 +1,38 @@
+<% include ./partials/header %>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h1 class="page-header">Shipping Options</h1>
+		</div>
+	</div>
+
+
+			<form method="POST" action="/cart/shipment?_method=PUT">
+				<% shipment.services.forEach(function(service){ %>
+				<div class="panel panel-default nocards bvbform">
+					<div class="panel-body">
+	                    <div class="row">
+	                        <div class="col-md-1">
+	                            <input class="chooseship" type="radio" name="shipmenttypeid" value="<%=service.id %>">
+	                        </div>
+	                        <div class="col-md-6">
+	                            <p><%= service.name %></p>
+								<h3><strong>$<%= service.price %></strong></h3>
+	                        </div>
+	                    </div>
+					</div>
+				</div>
+				<% }) %>
+					<button class="btn btn-success nocardbutton" href="/cart/shipment" type="submit">Select Shipping Choice</button>
+			</form>
+</div>
+
+
+
+
+
+<% include ./partials/footer %>
+

@@ -1,0 +1,193 @@
+<% include ./partials/header %>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h1 class="page-header">Shipping Info</h1>
+		</div>
+	</div>
+
+	        <% if(account.billing) {
+				var acctBillingExists = account.billing || account.billing.name;
+				var acctShippingExists = account.shipping || account.shipping.name;
+				var acctCard = account.billing.card;
+			}
+			%>
+			<%
+				var cartBillingExists = cart.billing || cart.billing.name;
+				var cartShippingExists = cart.shipping || cart.shipping.name;
+			%>
+
+			<% if ((!acctBillingExists && !acctShippingExists) && (!cartBillingExists && !cartShippingExists)) { %> 
+			<div class="panel panel-default nocards bvbform">
+				<div class="panel-body">
+					<p>You don't have any shipping information associated with your account. Please add info to continue. </p>
+					<a class="btn btn-info nocardbutton" href="#" role="button" onclick="shownew()">Add Shipping Info</a>
+				</div>
+			</div>
+
+			<% } else if((acctBillingExists || cartBillingExists) && (!cartShippingExists || !acctShippingExists)) { %> 
+
+				
+			<% 
+				var acctBilling = account.billing;
+				var cartBilling = cart.billing;
+				var acctShipping = account.shipping;
+				var cartShipping = cart.shipping
+				var cartCard = cart.billing.card;
+	    		var cartBillingAddress =  cartBilling.city + ", " + cartBilling.state + " " + cartBilling.zip;
+				var cartShippingAddress =  cartShipping.city + ", " + cartShipping.state + " " + cartShipping.zip;
+			%>
+
+			<h3>We found an address on file.</h3>
+			
+			<div class="col-md-6">
+				<div class="panel panel-default nocards bvbform">
+					<div class="panel-body">
+						<h3><strong>Cart Shipping Information</strong></h3>
+						<p><strong><%=cartShipping.name %></strong></p>
+						<p><%= cartShipping.address1 %> </p>
+						<p><%= cartBillingAddress %> </p>
+						<p><%=cartShipping.phone %></p>
+						<a class="btn btn-success nocardbutton" href="/cart/shipment" role="button">Use This Address</a>
+						<a class="btn btn-info nocardbutton" href="#" role="button" onclick="shownew()">Add New Address</a>
+					</div>
+				</div>
+			</div>
+
+            <div class="addnew">
+				<h2>Add New Address</h2>
+	
+				<form class="bvbform" id="checkout-form" method="POST" action="/cart/shipping?_method=PUT">
+					<div class="row">
+						<div class="field form-group col-md-12 col-xs-12 span4">
+							<label class="control-label field-label">Name</label> 
+							<input type="text" name="name" value="" placeholder="" data-type="string" class="form-control shipping-name">
+						</div>
+					</div>
+                    <div class="row">
+						<div class="field form-group col-md-12 col-xs-12 span4">
+							<label class="control-label field-label">Address Line 1</label> 
+							<input type="text" name="address1" value="" placeholder="" data-type="string" class="form-control shipping-address1">
+						</div>
+					</div>
+					<div class="row">
+						<div class="field form-group col-md-12 col-xs-12 span4">
+							<label class="control-label field-label">Address Line 2</label> 
+							<input type="text" name="address2" value="" placeholder="" data-type="string" class="form-control shipping-address2">
+						</div>
+					</div>
+					<div class="row">
+						<div class="field col-md-3 col-xs-3 form-group span2">
+							<label class="control-label field-label">City</label> 
+							<input type="text" name="city" value="" placeholder="" data-type="string" class="form-control shipping-city">
+						</div>
+						<div class="field col-md-3 col-xs-3 form-group span2">
+							<label class="control-label field-label">State</label> 
+							<input type="text" name="state" value="" placeholder="" data-type="string" class="form-control shipping-state">
+						</div>
+						<div class="field col-md-3 col-xs-3 form-group span2">
+							<label class="control-label field-label">Zip/Postal Code</label> 
+							<input type="text" name="zip" value="" placeholder="" data-type="string" class="form-control shipping-zip">
+						</div>
+						<div class="field col-md-3 col-xs-3 form-group span2">
+							<label class="control-label field-label">Country</label> 
+							<input type="text" name="country" value="" class="form-control shipping-country">
+						</div>
+					</div>
+                    <input type="hidden" class="shipname" value="<%=cartBilling.name%>"/>
+                    <input type="hidden" class="shipaddress1" value="<%=cartBilling.address1%>"/>
+                    <input type="hidden" class="shipphone" value="<%=cartBilling.phone%>"/>
+                    <input type="hidden" class="shipcity" value="<%=cartBilling.city%>"/>
+                    <input type="hidden" class="shipstate" value="<%=cartBilling.state%>"/>
+                    <input type="hidden" class="shipzip" value="<%=cartBilling.zip%>"/>
+                    <input type="hidden" class="shipcountry" value="<%=cartBilling.country%>"/>
+					<button class="btn btn-info form-group" type="submit">Add Shipping Info</button>
+					<button class="btn btn-danger form-group" type="button" onclick="hideform()">Cancel</button>
+				</form>
+			</div>
+
+            <% } else { %> 
+
+			<% 
+				var billing = account.billing;
+				var shipping = account.shipping;
+    			var card = account.billing.card;
+	    		var billingAddress =  billing.city + ", " + billing.state + " " + billing.zip;
+			%>
+
+			<% var shippingAddress = shipping.city + ", " + shipping.state + " " + shipping.zip %>            
+
+                <div class="panel panel-default nocards bvbform">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>Shipping Information</h3>
+                                <p><strong><%=shipping.name %></strong></p>
+                                <p><%= shipping.address1 %> </p>
+                                <p><%= shippingAddress %> </p>
+                                <p><%=shipping.phone %></p>
+								<a class="btn btn-success nocardbutton" href="/cart/shipment" role="button">Use This Address</a>
+								<a class="btn btn-info nocardbutton" href="#" role="button" onclick="shownew()">Use New Address</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+				<div class="addnew">
+					<h2>Add New Address</h2>
+		
+					<form class="bvbform" id="checkout-form" method="POST" action="/cart/shipping?_method=PUT">
+						<div class="row">
+							<div class="field form-group col-md-12 col-xs-12 span4">
+								<label class="control-label field-label">Name</label> 
+								<input type="text" name="name" value="" placeholder="" data-type="string" class="form-control shipping-name">
+							</div>
+						</div>
+						<div class="row">
+							<div class="field form-group col-md-12 col-xs-12 span4">
+								<label class="control-label field-label">Address Line 1</label> 
+								<input type="text" name="address1" value="" placeholder="" data-type="string" class="form-control shipping-address1">
+							</div>
+						</div>
+						<div class="row">
+							<div class="field form-group col-md-12 col-xs-12 span4">
+								<label class="control-label field-label">Address Line 2</label> 
+								<input type="text" name="address2" value="" placeholder="" data-type="string" class="form-control shipping-address2">
+							</div>
+						</div>
+						<div class="row">
+							<div class="field col-md-3 col-xs-3 form-group span2">
+								<label class="control-label field-label">City</label> 
+								<input type="text" name="city" value="" placeholder="" data-type="string" class="form-control shipping-city">
+							</div>
+							<div class="field col-md-3 col-xs-3 form-group span2">
+								<label class="control-label field-label">State</label> 
+								<input type="text" name="state" value="" placeholder="" data-type="string" class="form-control shipping-state">
+							</div>
+							<div class="field col-md-3 col-xs-3 form-group span2">
+								<label class="control-label field-label">Zip/Postal Code</label> 
+								<input type="text" name="zip" value="" placeholder="" data-type="string" class="form-control shipping-zip">
+							</div>
+							<div class="field col-md-3 col-xs-3 form-group span2">
+								<label class="control-label field-label">Country</label> 
+								<input type="text" name="country" value="" class="form-control shipping-country">
+							</div>
+						</div>
+						<button class="btn btn-info form-group" type="submit">Add Shipping Info</button>
+						<button class="btn btn-danger form-group" type="button" onclick="hideform()">Cancel</button>
+					</form>
+				</div>
+
+			<% } %>
+
+</div>
+
+
+
+
+
+<% include ./partials/footer %>
+

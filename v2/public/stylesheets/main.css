@@ -1,0 +1,622 @@
+/*Typography*/
+
+* {
+	font-family: Nexa, Arial, sans-serif;
+}
+@font-face {
+    font-family: Bebas;
+    src: url('../fonts/BebasNeue.otf') ;
+}
+@font-face {
+    font-family: Lithos;
+    src: url('../fonts/lithos-webfont.woff') ;
+}
+@font-face {
+    font-family: Lithos Pro Black;
+    src: url('../fonts/LithosProBlk.otf') ;
+}
+@font-face {
+    font-family: Ikaros;
+    src: url('../fonts/ikarosregular-webfont.woff') ;
+}
+@font-face {
+    font-family: Oswald;
+    src: url('../fonts/Oswald-Heavy.ttf') ;
+
+}
+@font-face {
+    font-family: Nexa;
+    src: url('../fonts/Nexa.woff') ;
+
+}
+@font-face {
+    font-family: NexaB;
+    src: url('../fonts/Nexa Bold.otf') ;
+}
+h1 {
+	font-size: 60px;
+	font-weight: 700;
+}
+h2 {
+	font-size: 25px;
+	font-weight: 400; 
+}
+
+/*Navigation*/
+
+.bground {
+	background: url("../imgs/booksss.jpg") no-repeat center center;
+	background-size: cover;
+}
+.navbar{
+	margin-bottom: 0px;
+}
+
+.nav-title h5{
+	font-weight: 700;
+	font-family: NexaB;
+	display: inline-block;
+	padding: 0;	
+	margin: 5px;
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: 2px;
+}
+.nav-title img {
+	display: inline-block;
+	padding: 6px 2px;
+	font-size: 15px;
+	font-weight: 500;
+	letter-spacing: 2px;
+}
+#nav li{
+	display: inline-block;
+	list-style: none;
+	text-align: right;
+	height: 70px;
+	
+
+}
+
+#nav ul {
+	list-style: none;
+	display: inline;
+	position: absolute;
+	left: -9999px;
+	color: black;
+}
+#nav ul > li {
+	float: none;
+	margin: 0;
+	display: inline-block;
+}
+#nav li:hover ul {
+	left: 0px;
+	display: inline-block;
+	float: right;
+	text-align: right;
+	right: 0px;
+}
+
+
+#nav li:hover > ul > li >  a{ 
+	background-color: rgba(0,0,0,0.99);
+	height: inherit;
+}
+#nav li:hover ul a{ 
+    text-decoration:none;
+}
+#nav li:hover ul li a:hover{ 
+	color: black;
+	font-family: NexaB;
+	background-color: #00470D;
+}
+
+#nav li > a{
+	color: white;
+	display: block;
+	padding: 0 10px;
+	font-size: 17px;
+	font-family: NexaB;
+	height: inherit;
+	line-height: 70px;  
+}
+#nav li > a:hover {
+	background-color: black;
+	text-decoration: none;
+}
+.headeractive {
+	background-color: #770000;
+}
+.headerrow {
+	height: inherit;
+}
+.nav-center {
+	height: inherit;
+}
+.nav-center h3 {
+	font-size: 20px;
+	font-family: Papyrus;
+	margin:  auto;
+}
+.nav-center span {
+	font-family: NexaB;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	font-size: 15px;
+}
+#nav {
+	text-align: right;
+	margin: 0;
+	height: auto;
+	position: relative;
+	z-index: 5;
+}
+
+.header {
+	height: 70;
+	background-color: #232323;
+	color: white;
+	font-family: Nexa;
+}
+.alertrow {
+	color: black;
+}
+.cartlink i, .cartlink span {
+	margin: 0 5px;
+}
+
+#cartpopup {	
+	float: right;
+	margin-right: 25px;
+	min-height: 200px;
+}
+#cartpopup ul > div > a {
+	background-color: red;
+	font-size: 10px;
+	
+}
+#cartpopuplink {
+	max-width: 30px;
+	font-size: 15px;
+}
+
+
+/*MAIN PAGE ELEMENTS*/
+#landing {
+	padding-top: 25%;
+	text-align: center;
+	color: white;
+	text-shadow: 2px 2px 3px black;
+}
+#landing i{
+	margin: 0px 10px;
+}
+
+#landing hr{
+	width: 20%;
+	margin: 30 auto;
+}
+#landing a{
+	margin-bottom: 25%;
+}
+#landing h1{
+	font-size: 100px;
+	font-family: Bebas;
+	letter-spacing: 5px;
+	text-shadow: 1px 1px 3px black;
+}
+
+#landing h2{
+	font-size: 40px;
+	font-weight: 700;
+	font-family: NexaB;
+	text-transform: uppercase;
+	word-wrap: break-word;
+	width: 40%;
+	margin: 0 auto;
+	padding: 30px;
+	text-shadow: 1px 1px 3px black;
+}
+
+/*JUMBOTRON*/
+
+.jumbomain {
+	position: relative;
+	background: url("../imgs/BlkBG1.jpg") no-repeat center center;
+	background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+	background-size: cover;
+	max-width: 100%;
+	height: 600px;
+}
+.jumbotext {
+	padding: 50 auto 50;
+}
+.jumbotext h1{
+	font-size: 100px;
+	color: black;
+	font-family: Bebas;
+	margin: 0;
+	padding-top: 150px;
+	padding-bottom: -10px;
+	letter-spacing: 5px;
+	text-shadow: 1px 1px 3px black;
+}
+hr {
+	margin: 0 auto;
+	border: 1px solid gray;
+}
+.jumbotext h2 {
+	font-family: NexaB;
+	text-transform: uppercase;
+	word-wrap: break-word;
+	width: 40%;
+	margin: 0 auto;
+	padding: 30px;
+	font-size: 40px;
+	color: black;
+	text-shadow: 1px 1px 3px black;
+}
+.button {
+	color: black;
+	background-color: transparent;
+	border: 3px solid black;
+	border-radius: 2px;
+	text-transform: uppercase;
+	display: inline;
+	font-family: NexaB;
+	font-size: 20px;
+	padding: 20px;
+	font-weight: 700;
+	box-shadow: 1px 1px 3px black;
+}
+.buttonland {
+	color: white;
+	background-color: transparent;
+	border: 3px solid white;
+	border-radius: 2px;
+	text-transform: uppercase;
+	display: inline-block;
+	font-family: NexaB;
+	font-size: 20px;
+	display: inline-block;
+	padding: 20px;
+	font-weight: 700;
+	box-shadow: 1px 1px 3px black;
+}
+.button:hover{
+	text-decoration: none;
+	background-color: #232323;
+	color: white;
+	border-color: white;
+}
+.buttonland:hover{
+	text-decoration: none;
+	background-color: #232323;
+	color: white;
+	border-color: white;
+}
+/*CONTENT*/
+
+/*index.html css*/
+.page-header {
+	font-family: Bebas;
+	font-size: 80px;
+	letter-spacing: 5px;
+}
+.feathead {
+	margin: 75 auto;
+	font-family: NexaB;
+	font-size: 50px;
+}
+.featitems {
+	padding: 10 90px;
+	text-align: center;
+}
+.featitems h3{
+	font-family: NexaB;
+	font-size: 25px;
+	text-transform: uppercase;
+}
+.featitems img {
+	border: 3px inset black;
+}
+.featitems p{
+	font-family: Nexa;
+	line-height: 30px;
+	font-size: 20px;
+}
+.featitems a{
+	font-family: NexaB;
+	text-transform: uppercase;
+	font-size: 15px;
+}
+.bookinfo {
+	line-height: 40px;
+}
+.cart {
+	font-size: 20px;
+}
+.cartinput{
+	margin: 5px;
+	line-height: 40px;
+	width: 75px;
+	border-radius: 3px;
+}
+.pageheader{
+	font-size: 80px;
+	font-family: Bebas;
+	letter-spacing: 5px;
+	color: black;
+}
+.side-header{
+	font-size: 20px;
+	color: black;
+	padding: 20px;
+	display: inline-block;
+}
+/*About Page*/
+
+.AboutText {
+	margin-left: 20px;
+	font-size: 25px;
+	font-family: Nexa;
+	font-weight: 400;
+}
+.map-container {
+  position: relative;
+  height: auto;
+  overflow: hidden;
+  padding-bottom: 100%;
+}
+
+.map-container {
+	margin-bottom: 30px;
+	margin-right: 10px;
+}
+.map-container iframe {
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*Shopping*/
+
+.thumbnail form{
+	display: inline;
+}
+.shopitem{
+	padding-bottom: 20px;
+}
+.bookcats, .mediacats {
+	font-family: NexaB;
+	text-transform: uppercase;
+	margin-bottom: 50px;
+	font-size: 30px;
+	font-weight: 700;
+	color: black;
+}
+.bookcats a, .mediacats a {
+	color: black;
+	text-decoration: none;
+}
+.books > .img-responsive, .books > .thumbnail a>img, .books > .thumbnail>img {
+	height: 300px;
+}
+.bookimg {
+	height: 300px;
+}
+.books img{
+	text-align: center;
+	display: inline-block;
+	border: 3px solid black;
+}
+
+.bkname{
+	font-family: Nexa;
+	font-size: 20px;
+	vertical-align: middle;
+	height: 60px;
+}
+.bkprce{
+	font-family: Nexa;
+	font-size: 15px;
+	vertical-align: middle;
+}
+.books h5, .dvd h5 {
+	margin-bottom: 40px;
+}
+/*Cart */
+
+.cartitems {
+	list-style: none;
+	padding: 10px auto;
+}
+.cartitem {
+	margin: 10px 15px;
+}
+.cartqty{
+	margin: 3px;
+	width: 50px;
+	border-radius: 3px;
+}
+.inline {
+	display: inline;
+	margin-bottom: 100px;
+	margin-left: 10px;
+}
+.cartthumb {
+	height: 300px;
+	margin: 15px;
+}
+.cartobject {
+	display: block;
+	border: 2px solid rgba(44, 44, 44, 0.5);
+	padding: 10px;
+	margin: 5px 10px;
+}
+.cartoptions {
+	float: right;
+}
+.samelineform {
+	display: inline-block;
+}
+.cartgroup {
+	display: inline;
+}
+.checkoutmargin {
+	margin-bottom: 150px;
+}
+
+/*Billing */
+
+.bvb-form {
+	width: 30%;
+}
+
+.bvbform {
+	margin: 20px;
+	font-family: Nexa;
+
+}
+.addnew, .neworderaddress {
+	display: none;
+}
+
+.chooseship {
+	vertical-align: middle;
+	margin: 35px 0 0;
+}
+.nospace {
+	line-height: 8px;
+	font-size: 20px;
+	text-align: right;
+}
+/*Media*/
+
+.dvd {
+	text-align: center;
+}
+
+/*Contact*/
+
+
+.contactdiv {
+	font-family: Nexa;
+	font-size: 20px;
+	float: left;
+}
+.contactdiv {
+	padding: 15px;
+}
+.contactsubmit {
+	margin: 20px 0;
+	background-color: red;
+}
+label {
+	font-size: 14px;
+	font-weight: 700;
+	font-family: NexaB;
+}
+.textbox {
+	margin: 5px 0 20px;
+	width: 100%;
+	border: 0;
+	padding: 5 8;
+	border-radius: 0px;
+}
+/*Footer*/
+
+footer {
+	height: 289px;
+	background-color: #2c2c2c;
+	color: white;
+	margin-top: 100px;
+}
+footer a {
+	color: white;
+	font-weight: 600;
+}
+footer a:hover {
+	text-decoration: none;
+	color: white;
+	text-shadow: 2px 2px 15px gold;
+}
+footer p{
+	margin: 50 auto 20;
+	font-family: Papyrus;
+	font-size: 20px;
+}
+footer h4 {
+	font-size: 20px;
+}
+.foottitle {
+	font-family: NexaB;
+	font-size: 15px;
+	text-align: center;
+}
+.footlinks li {
+	font-family: Nexa;
+	margin: 15 auto;
+	text-align: center;}
+.footlinks img {
+	margin: auto 3; 	
+}
+/*MEDIA QUERIES*/
+
+@media screen and (max-width: 768px) {
+	.nav-title img {
+		text-align: center;
+		display: block;
+		margin: 10 auto;
+	}
+	.nav-title h5 {
+		display: none;
+	}
+	.nav-center h3 {
+		margin: 2 auto 5;
+	}
+	#nav a {
+		margin: 10 0;
+		padding: 5;
+	}
+	#nav {
+		text-align: center;
+		border-top: 1px solid black;
+	}
+	.jumbomain {
+		height: 100%;
+		width: auto;
+	}
+	.jumbotext h1 {
+		padding-top: 25;
+		font-size: 75px;
+	}
+	.jumbotext h2 {
+		margin: 0 5;
+		padding: 5 auto;
+		height: auto;
+		width: 100%;
+		font-size: 20px;
+	}
+	.jumbotext a {
+		display: inline-block;
+	}
+	.feathead {
+		margin: 30 auto;
+	}
+	.feathead h1 {
+		font-size: 30px;
+	}
+	.featitems {
+		padding: 10 50;
+	}
+	.featitems h3 {
+		font-size: 30px;
+	}
+}

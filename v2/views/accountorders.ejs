@@ -1,0 +1,181 @@
+<% include ./partials/header %>
+
+<div class="container-fluid">
+	<div class="row">
+		<h1 class="text-center page-header">Orders</h1>
+        <div class="col-md-2">
+                <ul class="nav nav-pills nav-stacked">
+				<li role="presentation"><a href="/account">General</a></li>
+				<li role="presentation"><a href="/">Password/Email</a></li>
+				<li role="presentation"><a href="/account/billing">Billing</a></li>
+				<li role="presentation"><a href="/account/shipping">Shipping</a></li>
+				<li role="presentation" class="active"><a href="/">Orders</a></li>
+				<li role="presentation"><a href="/">Reviews</a></li>
+				<li role="presentation"><a href="/">Coupons</a></li>
+				<li role="presentation"><a href="/">Subscriptions</a></li>
+				<li role="presentation"><a href="/">Downloaded Items</a></li>
+				<li role="presentation"><a href="/">Preferences</a></li>
+                </ul>
+    </div>
+    <% if (orders.count === 0 || !orders.results[0]) { %>
+        <div class="col-md-4">
+            <h2>You currently have no orders. Feel free to <a href="/shop">browse</a> our selections. Add items to your cart, and then come back.</h2>
+
+            <% } else if(orders.count === 1) { %> 
+
+            <% var order = orders.results[0];
+               var billing = orders.results[0].billing;
+               var shipping = orders.results[0].shipping;
+               var card= orders.results[0].billing.card;
+               var billingAddress = billing.address1 + " "  + billing.city + ", " + billing.state + " " + billing.zip;
+            %>
+            <div class="panel panel-default bvbform">
+                <div class="panel-body">
+                    <h2 class="text-center">Order Info</h2>
+                	<p><strong>Order Number</strong> - <%=order.number %></p>
+                    <p><strong>Date Created</strong> - <%= moment(order.date_created) %> </p>
+                	<p><strong>Grand Total</strong> - <%=order.grand_total %> <%=order.currency %></p>
+        			<p><strong>Items Included</strong> - <%= order.item_quantity%></p>
+                    <p><strong>Items</strong></p>
+                    <% order.items.forEach(function(item){ %>
+                        <li> <%= item.name %> - <%=item.price %> </li>
+                    <% }) %>
+                </div>
+            </div>
+            <div class="panel panel-default bvbform">
+                <div class="panel-body">
+                    <h2 class="text-center">Billing Info</h2>
+        
+                    <% if (!billing || billing === undefined) { %> 
+                    <a class="btn btn-info" href="/cart/billing" role="button">Add Billing Info</a>
+                    <% } else { %> 
+                    <p><strong>Billing Name</strong> - <%=billing.name %></p>
+                	<p><strong>Billing Address</strong> - <%= billingAddress %> </p>
+                	<p><strong>Billing Phone</strong> - <%=billing.phone %></p>
+        			<p><strong>Credit Card</strong> - <%= card.brand %> ending in <%=card.last4 %></p>
+                    <p><strong>Expiration</strong> - <%= card.exp_month %>/<%=card.exp_year %></p>
+                    <% } %>
+    
+                </div>
+            </div>
+        </div>   
+        <div class="col-md-4">
+            <div class="panel panel-default bvbform">
+                <div class="panel-body">
+                    <h2 class="text-center">Shipping Info</h2>
+            
+                        <% if (!shipping || shipping === undefined) {
+                            var acctShip = account.shipping; 
+                            var acctShippingAddress = acctShip.city + ", " + acctShip.state + " " + acctShip.zip;     
+                        %> 
+                        <p>You don't have shipping info for this order yet. Would you like to use the default address on file?</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="panel panel-default bvbform">
+                                    <div class="panel-body">
+                                                <p><strong><%=acctShip.name %></strong></p>
+                                                <p><%= acctShip.address1 %> </p>
+                                                <p><%= acctShippingAddress %> </p>
+                                                <p><%=acctShip.phone %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p><label for="samebilling"><input type="radio" name="checked" id="usedefault" value="">Yes, use default address.</label></p>
+                        <label for="samebilling"><input type="radio" name="checked" id="addnewaddress" value="">No, add new address.</label>
+            
+                        <div class="neworderaddress">
+                            <h2>Add New Address</h2>
+                
+                            <form class="bvbform" id="checkout-form" method="POST" action="/cart/shipping?_method=PUT">
+                                <div class="row">
+                                    <div class="field form-group col-md-12 col-xs-12 span4">
+                                        <label class="control-label field-label">Name</label> 
+                                        <input type="text" name="name" value="" placeholder="" data-type="string" class="form-control shipping-name">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="field form-group col-md-12 col-xs-12 span4">
+                                        <label class="control-label field-label">Address Line 1</label> 
+                                        <input type="text" name="address1" value="" placeholder="" data-type="string" class="form-control shipping-address1">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="field form-group col-md-12 col-xs-12 span4">
+                                        <label class="control-label field-label">Address Line 2</label> 
+                                        <input type="text" name="address2" value="" placeholder="" data-type="string" class="form-control shipping-address2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="field col-md-3 col-xs-3 form-group span2">
+                                        <label class="control-label field-label">City</label> 
+                                        <input type="text" name="city" value="" placeholder="" data-type="string" class="form-control shipping-city">
+                                    </div>
+                                    <div class="field col-md-3 col-xs-3 form-group span2">
+                                        <label class="control-label field-label">State</label> 
+                                        <input type="text" name="state" value="" placeholder="" data-type="string" class="form-control shipping-state">
+                                    </div>
+                                    <div class="field col-md-3 col-xs-3 form-group span2">
+                                        <label class="control-label field-label">Zip Code</label> 
+                                        <input type="text" name="zip" value="" placeholder="" data-type="string" class="form-control shipping-zip">
+                                    </div>
+                                    <div class="field col-md-3 col-xs-3 form-group span2">
+                                        <label class="control-label field-label">Country</label> 
+                                        <input type="text" name="country" value="" class="form-control shipping-country">
+                                    </div>
+                                </div>
+                                <input type="hidden" class="shipname" value="<%=billing.name%>"/>
+                                <input type="hidden" class="shipaddress1" value="<%=billing.address1%>"/>
+                                <input type="hidden" class="shipphone" value="<%=billing.phone%>"/>
+                                <input type="hidden" class="shipcity" value="<%=billing.city%>"/>
+                                <input type="hidden" class="shipstate" value="<%=billing.state%>"/>
+                                <input type="hidden" class="shipzip" value="<%=billing.zip%>"/>
+                                <input type="hidden" class="shipcountry" value="<%=billing.country%>"/>
+                                <button class="btn btn-info form-group" type="submit">Add Shipping Info</button>
+                            </form>
+                        </div>
+                        <% } else { 
+                            var shippingAddress = shipping.address1 + " "  + shipping.city + ", " + shipping.state + " " + shipping.zip;    
+                        %> 
+                        <p><strong>Shipping Name</strong> - <%=shipping.name %></p>
+                        <p><strong>Shipping Address</strong> - <%= shippingAddress %> </p>
+                        <p><strong>Shipping Phone</strong> - <%=shipping.phone %></p>
+                        <p><strong>Credit Card</strong> - <%= card.brand %> ending in <%=card.last4 %></p>
+                        <p><strong>Expiration</strong> - <%= card.exp_month %>/<%=card.exp_year %></p>
+            
+                        <% } %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+    <% } else { %>
+        <div class="col-md-10">
+            <% orders.results.forEach(function(order){ %>
+                <div class="panel panel-default nocards bvbform">
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <p><strong>Order #<%= order.number %></strong> - <%= moment(order.date_created) %></p>
+                            <h3><strong>$<%= order.grand_total %></strong></h3>
+                            <p><strong>Items Included</strong> - <%= order.item_quantity%></p>
+                            <p><strong>Items</strong></p>
+                            <% order.items.forEach(function(item){ %>
+                                <li> <%= item.name %> - <%=item.price %> </li>
+                            <% }) %>
+                        </div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2 nospace">
+                            <p>Subtotal - <%= order.sub_total %></p>
+                            <p>+</p>
+                            <p><u>Taxes - <%= order.taxes[0].amount %></u></p>
+                            <p>Grand Total - <%= order.grand_total %></p>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div>
+
+
+<% include ./partials/footer %>

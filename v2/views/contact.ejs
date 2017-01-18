@@ -1,0 +1,33 @@
+<% include ./partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1 class="page-header">Contact Us</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 contactdiv">
+      <p class="contactText">At Black Voices Bookstore, we strive to do our best work and provide our best service for Afrikan people. If you have any questions, comments, or critiques concerning our business, please send us your thoughts. If you want to custom order a book, please use our <a href="/order">Custom Item Ordering Form</a>. We look forward to hearing from you.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 contactdiv">
+    <form action="/contact" method="POST">
+      <div class="form-group form-group-lg">
+        <label for="InputName1">Name</label>
+        <input type="text" class="form-control input-lg" name="name" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <label for="InputEmail1">Email address</label>
+        <input type="email" class="form-control input-lg" name="email" placeholder="first.last@example.com">
+      </div>
+      <label for="InputComments1">Comments/Questions/Concerns</label>
+      <textarea class="form-control textbox input-lg" rows="10" name="comments" placeholder="Enter your comments here"></textarea>
+      <button class="btn btn-default contactsubmit input-lg" type="submit" >Submit</button>
+    </form>
+  </div>
+</div>
+</div>
+
+<% include ./partials/footer %>

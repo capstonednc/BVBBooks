@@ -1,0 +1,98 @@
+<% include ./partials/header %>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h1 class="page-header">Checkout</h1>
+		</div>
+	</div>
+
+    <% 
+    var billing = cart.billing;
+    var shipping = cart.shipping;
+    var cardinfo = billing.account_card_id;
+    var card = billing.card;
+    var billingAddress = billing.address1 + " "  + billing.city + ", " + billing.state + " " + billing.zip 
+    var shippingAddress =  shipping.city + ", " + shipping.state + " " + shipping.zip
+    %>
+
+    <div class="row">
+        <% cart.items.forEach(function(item){ %>
+            <div class="col-md-4 text-center">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p> <%=item.product.name %></p>
+                    <p> <%= item.price %></p> 
+                    <img class = "cartthumb" src="<%= item.product.images[0].file.url %>">
+                    <form class="samelineform" action="/cart" method="POST">
+                        <div class="form-group">
+                            <input class="cartqty" type="number" name="quantity"min="0" max="100" step="1" value="<%= item.quantity%>">
+                            <input type="hidden" name="itemid" value="<%-item.id%>">
+                            <input type="hidden" name="productId" value="<%-item.product.id%>">
+                            <button class="btn btn-primary btn-group" role="group" type="submit">Update Quantity</button>    
+                        </div>
+                    </form>
+                    <form class="samelineform" action="/cart/remove" method="POST">
+                        <div class="form-group">
+                            <input class="cartqty" type="hidden" name="quantity"min="0" max="100" step="1" value="<%= item.quantity%>">
+                            <input type="hidden" name="itemid" value="<%-item.id%>">
+                            <button class="btn btn-danger btn-group" role="group" type="submit">Remove</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+        
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default bvbform bg-success">
+                <div class="panel-body">
+                    <h3>Billing Information</h3>
+                    <p><strong><%=billing.name %></strong></p>
+                    <p><%= billingAddress %> </p>
+                    <p><%=billing.phone %></p>
+                    <p><strong><%= card.brand %></strong> ending in <%=card.last4 %> Expires <%= card.exp_month %>/<%=card.exp_year %></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default nocards bvbform bg-success">
+                <div class="panel-body">
+                    <h3>Shipping Information</h3>
+                    <p><strong><%=shipping.name %></strong></p>
+                    <p><%= shipping.address1 %> </p>
+                    <p><%= shippingAddress %> </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default nocards bvbform bg-success">
+                <div class="panel-body">
+                    <h3>Shipping Service</h3>
+                    <p><strong><%=shipping.service_name %></strong></p>
+                    <p><%= shipping.address1 %> <%= shippingAddress %> </p>
+                    <p><%= shipping.price %> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center checkoutmargin">
+        <form class="inline" action="/checkout" method="POST">
+                <input type="hidden" name="itemid" value="<%= cart %>">
+                <button class="col-md-6 col-md-offset-3 btn btn-success btn-lg" type="submit">Checkout</button>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+<% include ./partials/footer %>
+
