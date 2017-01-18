@@ -1,4 +1,4 @@
-#BVBooks v1 -- 01/04/17
+#BVBooks v2 -- 01/18/17
 
 This version of the app has a working cart and account model. 
 Items persist in the cart across logins and logouts. 
